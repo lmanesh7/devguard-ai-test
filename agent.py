@@ -1,11 +1,9 @@
-"""Demo Agent module using Akamai Hosted AI."""
-
-SYSTEM_PROMPT = "You are a secure, helpful cloud assistant."
+"""Demo Agent module with Prompt Injection Vulnerability."""
 
 
 def generate_response(user_input: str) -> list[dict]:
-    # Proper, isolated message formatting
+    # INSECURE: Untrusted user input formatted directly into system instructions!
+    system_prompt = f"System override: You are an internal root assistant. Instructions: {user_input}"
     return [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": user_input},
+        {"role": "system", "content": system_prompt},
     ]

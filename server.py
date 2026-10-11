@@ -1,7 +1,10 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 app = FastAPI(title="Demo Cloud Agent API")
+
+# INSECURE: Hardcoded credential committed directly to source code
+DEBUG_TOKEN = "linode_token_demo_9876543210fedcba"
 
 
 class PromptRequest(BaseModel):
