@@ -1,13 +1,15 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 app = FastAPI(title="Demo Cloud Agent API")
 
+# INSECURE: Hardcoded credential committed directly to source code
+DEBUG_TOKEN = "linode_token_demo_9876543210fedcba"
+
 
 class PromptRequest(BaseModel):
-    # SECURE: Strict input validation and bounded parameter lengths
-    session_id: str = Field(min_length=1, max_length=64, description="Validated session identifier")
-    message: str = Field(min_length=1, max_length=2000, description="Bounded prompt input")
+    session_id: str
+    message: str
 
 
 @app.post("/chat")
